@@ -77,4 +77,13 @@ public class Order {
         }
     }
 
+    // 조회로직
+    public int getTotalPrice(){
+        int totalPrice = 0;
+        for (OrderItem orderItem : orderItems) {
+            totalPrice += orderItem.getOrderPrice();
+        }
+        return totalPrice;
+    }
+
 }
