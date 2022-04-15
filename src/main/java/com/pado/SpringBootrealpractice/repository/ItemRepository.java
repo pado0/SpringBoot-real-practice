@@ -12,6 +12,7 @@ import java.util.List;
 public class ItemRepository {
     private final EntityManager em;
 
+<<<<<<< HEAD
     // item은 jpa에 저장하기 전까지 id값이 없음. 완전 새로 생성한 객체.
     public void save(Item item){
         if (item.getId() == null) {
@@ -22,6 +23,17 @@ public class ItemRepository {
     }
 
     public Item fineOne(Long id) {
+=======
+    public void save(Item item) {
+        if (item.getId() == null) {
+            em.persist(item);
+        }else{
+            em.merge(item);
+        }
+    }
+
+    public Item findOne(Long id) {
+>>>>>>> order_service
         return em.find(Item.class, id);
     }
 
