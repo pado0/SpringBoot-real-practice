@@ -7,4 +7,9 @@ import lombok.Setter;
 @Setter
 public class Hello {
     private String data;
+
+    public void setData(String data) {
+        //git test용 코드
+        this.data = data;
+    }
 }
