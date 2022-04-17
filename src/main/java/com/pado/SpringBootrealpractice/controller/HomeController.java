@@ -1,4 +1,4 @@
-package com.pado.SpringBootrealpractice.web;
+package com.pado.SpringBootrealpractice.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,6 @@ public class HomeController {
     @RequestMapping("/")
     public String home(){
         log.info("home controller");
-        return "home";
+        return "home"; // home.html로 찾아가는 것.
     }
 }

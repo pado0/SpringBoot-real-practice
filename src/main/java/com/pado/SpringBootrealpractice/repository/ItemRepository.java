@@ -16,7 +16,7 @@ public class ItemRepository {
     public void save(Item item){
         if (item.getId() == null) {
             em.persist(item); //id가 없으면 신규 등록
-        } else {
+        } else { // 수정할 때가 null이 아닌 경 > em.merge는 병합을 쓴거. 변경감지가 spring에서는 best practice.
             em.merge(item); //이미 db에 등록된걸 가져오면 업데이트하는것임.
         }
     }

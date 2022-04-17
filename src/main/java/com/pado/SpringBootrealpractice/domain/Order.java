@@ -1,6 +1,8 @@
 package com.pado.SpringBootrealpractice.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import java.util.List;
 @Table(name = "orders")
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
     @Id
@@ -69,11 +72,12 @@ public class Order {
 
     // 비즈니스 로직
     //주문 취소
+    // 데이터가 변경되면 jpa가 자동으로 db에 업데이트 쿼리를 날린다. jpa의 최고 강점!
     public void cancel(){
         if (delivery.getStatus() == DeliveryStatus.COMP) {
             throw new IllegalStateException("이미 배송 완료된 상품은 취소가 불가합니다.");
         }
-        this.setStatus(OrderStatus.CANCEL);
+        this.setStatus(OrderStatus.CANCEL); // 이렇게만 하고 db를 건들지 않았는데, state가 바뀌었다. -> jpa가 트랜젝션 커밋 시점에 더티체킹을 해서 알아서 바꿔놓는다.
         for (OrderItem orderItem : orderItems) {
             orderItem.cancel(); // 두 개 주문할 수 있으니 각각의 아이템에 캔슬 날려주는 것
         }

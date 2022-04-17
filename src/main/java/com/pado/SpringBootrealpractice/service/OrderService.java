@@ -32,6 +32,10 @@ public class OrderService {
         delivery.setAddress(member.getAddress());
         delivery.setStatus(DeliveryStatus.READY);
 
+        // 원래 상품 생성, 주문 생성을 각각 레포지토리에 생성하고 주문 저장을 해줬는데 그렇지 않고있다. 이유는 order entity의 cascade all 때문
+        // order를 persist 하면 orderitem, delivery를 다 persist 하도록 설정해놓음
+        // 추가로, 생성시 new 로 하지 않고 생성메서드를 사용하는 이유는 기능의 집중, 유지보수성 떄문이다.
+        // 파일마다 new Order 있으면 유지보수하기 쉽지 않아. 다 막아야할 것.
         // 주문할 상품 생성
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
 
