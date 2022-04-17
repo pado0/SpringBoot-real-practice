@@ -35,6 +35,8 @@ public class Order {
     @Enumerated(EnumType.STRING) // ORDINAL EnumType는 절대 쓰면안된다.
     private OrderStatus status; //주문상태 (ORDER, CANCEL)
 
+
+
     //연관관계 메서드, 양방향 연관관계 넣어주는 메서드, 양방향 편의 메서드//
     public void setMember(Member member) {
         this.member = member;
