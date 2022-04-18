@@ -22,7 +22,7 @@ public class OrderService {
 
     //주문
     @Transactional
-    public Long order(Long memberId, Long itemId, int count) { // 누가 무엇을 얼마나 주문할지
+    public Long order(Long memberId, Long itemId, int count) { // 누가 무엇을 얼마나 주문할지,  // 여기서 멤버가 넘어와버리면 jpa와 관계 없는 멤버가 넘어와버리는 것!! id만 넘겨주자
         //엔티티 조회
         Member member = memberRepository.findOne(memberId); // 회원 선택해야해서 멤버값 꺼냄
         Item item = itemRepository.findOne(itemId);
@@ -58,7 +58,7 @@ public class OrderService {
     }
 
     //주문 검색
-   /* public List<Order> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAll(orderSearch);
-    }*/
+   public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByCriteria(orderSearch);
+    }
 }
